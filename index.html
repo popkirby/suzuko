@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>種田梨沙</title>
+    <script src="kuso.js"></script>
+    <style>
+      input[type=range] {
+        width: 100%;
+      }
+
+      h1 {
+        white-space: nowrap;
+        overflow: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <input id="num" type="range" min="0" max="100" step="1" value="3">
+    <h1 id="suzuko"></h1>
+
+    <script type="text/javascript">
+      var suzuko = document.getElementById('suzuko')
+      document.getElementById('num').addEventListener('input', function(e) {
+        suzuko.innerHTML = createSuzuko(parseInt(e.target.value))
+      })
+    </script>
+  </body>
+</html>
