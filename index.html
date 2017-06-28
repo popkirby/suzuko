@@ -5,25 +5,58 @@
     <title>種田梨沙</title>
     <script src="kuso.js"></script>
     <style>
+      body {
+        overflow-x: hidden;
+      }
+
       input[type=range] {
         width: 100%;
       }
 
       h1 {
-        white-space: nowrap;
-        overflow: auto;
+        font-size: 5vmin;
       }
+
+      h1.eight {
+        font-size: 20vmin;
+        color: red;
+        letter-spacing: 10vmin;
+        text-align: center;
+        margin-right: -10vmin;
+      }
+
     </style>
   </head>
   <body>
-    <input id="num" type="range" min="0" max="100" step="1" value="3">
+    <select id="version">
+      <option selected="selected" value="0">0</option>
+      <option value="1">1</option>
+    </select>
+    <input id="num" type="range" min="0" max="1000" step="1" value="3">
     <h1 id="suzuko">三森すずこ</h1>
 
     <script type="text/javascript">
       var suzuko = document.getElementById('suzuko')
+      var version = 0
+      var num = 3
       document.getElementById('num').addEventListener('input', function(e) {
-        suzuko.innerHTML = createSuzuko(parseInt(e.target.value))
+        num = parseInt(e.target.value)
+        changeSuzuko()
       })
+      document.getElementById('version').addEventListener('change', function(e) {
+        version = parseInt(e.target.value)
+        changeSuzuko()
+      })
+
+      function changeSuzuko() {
+        if (num === 8) {
+          suzuko.className = 'eight'
+          suzuko.innerHTML = '八王子'
+        } else {
+          suzuko.className = ''
+          suzuko.innerHTML = createSuzuko(num, version)
+        }
+      }
     </script>
   </body>
 </html>

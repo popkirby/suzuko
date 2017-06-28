@@ -5,13 +5,20 @@ function num2kanji(num) {
 }
 
 
-const MORIS = ['', '木', '林']
+const MORIS = [
+  ['', '木', '林'],
+  ['', '木', '林', '森', '林林', '森林']
+]
 
-function num2mori(num) {
-  const reminder = num % 3
-  const mori = (num - reminder) / 3
+function num2mori(num, version) {
+  if (version > MORIS.length) version = 0
 
-  return '森'.repeat(mori) + MORIS[reminder]
+  const split = MORIS[version].length
+
+  const reminder = num % split
+  const mori = (num - reminder) / split
+
+  return '森'.repeat(split / 3).repeat(mori) + MORIS[version][reminder]
 }
 
 
@@ -35,7 +42,7 @@ function num2suzuko(num) {
 }
 
 
-function createSuzuko(num) {
-  return num2kanji(num) + num2mori(num) + num2suzuko(num)
+function createSuzuko(num, version) {
+  return num2kanji(num) + num2mori(num, version) + num2suzuko(num)
 }
 
